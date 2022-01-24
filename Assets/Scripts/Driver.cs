@@ -10,13 +10,18 @@ public class Driver : MonoBehaviour
     {
         transform.Rotate(0,0,0);
         transform.Translate(0,0,0);// for spawner settings 
+    
     }
     void Update()
     {   
         float steerAmount=Input.GetAxis("Horizontal")*steerSpeed*Time.deltaTime;
         float speedAmount=Input.GetAxis("Vertical")*moveSpeed*Time.deltaTime;
-        transform.Rotate(0,0,-steerAmount);
+        if(speedAmount!=0){
+           
+            transform.Rotate(0,0,speedAmount<=0?steerAmount:-steerAmount);
+        }
         transform.Translate(0,speedAmount,0);
         
     }
+   
 }
