@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class Delivery : MonoBehaviour
 {
-    [SerializeField] GameObject gameStatus;
+    private PackageAndCustomerController gameStatus;
+    void Start(){
+        gameStatus=FindObjectOfType<PackageAndCustomerController>();
+    }
     private void OnCollisionEnter2D(Collision2D other) {
         Debug.Log(other.collider.tag);
     }
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.tag=="Package"){
-           gameStatus.GetComponent<GameStatus>().packagePickUp();
+            gameStatus.PackagePickUp(other.GetComponent<Package>().packagePathId);
         }
         if(other.tag=="Customer"){
-            gameStatus.GetComponent<GameStatus>().customerDelivery();
+            gameStatus.DeliveredToCustomer();
         }
     }
 }
