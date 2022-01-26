@@ -40,7 +40,7 @@ public class PackageAndCustomerController : MonoBehaviour
     {
         Numbers = new List<int>();
         int x;
-        while(Numbers.Count < numberAmount)
+        while (Numbers.Count < numberAmount)
         {
             do
             {
@@ -63,7 +63,7 @@ public class PackageAndCustomerController : MonoBehaviour
         do
         {
             number = Random.Range(0, paths.Count);
-        } while (Numbers.Contains(number));
+        } while ((Numbers.Contains(number)));
         customer.SetActive(true);
         customer.transform.position = paths[number].transform.position;
         customer.GetComponent<Customer>().customerPathId = number;
@@ -71,17 +71,17 @@ public class PackageAndCustomerController : MonoBehaviour
     }
     public void PackagePickUp(int packagePathId)
     {
-        CustomerGenerator();
         Numbers.Remove(packagePathId);
         RandomDifferentNumber(0, paths.Count, packagesLength);
         PackageGenerator();
+        CustomerGenerator();
         foreach (var package in packages)
         {
             package.SetActive(false);
         }
         customer.SetActive(true);
         arrowUI.SetActive(true);
-        hasFollow=true;
+        hasFollow = true;
     }
     public void DeliveredToCustomer()
     {
@@ -91,7 +91,7 @@ public class PackageAndCustomerController : MonoBehaviour
             package.SetActive(true);
         }
         arrowUI.SetActive(false);
-        hasFollow=false;
+        hasFollow = false;
     }
 
 }
